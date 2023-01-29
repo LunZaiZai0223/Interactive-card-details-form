@@ -1,0 +1,40 @@
+@use '@style/colors.scss';
+@use '@style/breakpoint.scss';
+
+.success-message-container {
+  text-align: center;
+  max-width: 24rem;
+
+  .content {
+    margin: 2rem 0;
+
+    h2 {
+      letter-spacing: 2.5px;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    p {
+      letter-spacing: 0.5px;
+      color: colors.$dark-grayish-violet;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: colors.$very-dark-violet;
+    color: colors.$white;
+    font-size: 18px;
+    font-family: inherit;
+    border: none;
+    border-radius: 6px;
+  }
+}
+
+@media screen and (max-width: breakpoint.$mobile) {
+  .success-message-container {
+    max-width: unset;
+    margin-top: 20%;
+  }
+}

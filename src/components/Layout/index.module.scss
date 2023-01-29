@@ -1,10 +1,12 @@
 @use '@style/colors.scss';
+@use '@style/breakpoint.scss';
 
 main {
   height: 100%;
   display: flex;
   align-items: center;
   position: relative;
+  overflow: hidden;
 
   &:after {
     position: absolute;
@@ -14,7 +16,16 @@ main {
     content: "";
     width: 30%;
     background-image: url('../../assets/images/bg-main-desktop.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     z-index: -1;
+    transition: width .35s linear, height .35s linear;
+  }
+}
+
+main.is-active {
+  &:after {
+    width: 100%;
   }
 }
 
@@ -34,11 +45,13 @@ main {
     position: relative;
 
     &:first-of-type {
-      margin-left: 6.5rem;
+      //margin-left: 6.5rem;
+      margin-left: 20%;
     }
 
     &:last-of-type {
-      margin-left: 10.5rem;
+      //margin-left: 10.5rem;
+      margin-left: 30%;
     }
 
     .credit-card-content {
@@ -75,6 +88,9 @@ main {
 .right {
   width: 50%;
   padding: 4.5%;
+  transform: translateX(0px);
+  transition: transform .35s linear;
+  visibility: unset;
 
   form {
     max-width: 24rem;
@@ -85,6 +101,10 @@ main {
       label {
         display: block;
         margin-bottom: 8px;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        color: colors.$very-dark-violet;
+        font-weight: 500;
       }
 
       // TODO: 會有不同的 status 要處理（e.g. active, error）
@@ -96,11 +116,33 @@ main {
         width: 100%;
         padding: 10px;
         font-size: 16px;
+        font-family: inherit;
+
+        &::placeholder {
+          font-family: inherit;
+          color: colors.$dark-grayish-violet;
+        }
+
+        &:focus {
+          border: 1px solid transparent;
+          outline: 1px solid colors.$linear-gradient;
+        }
+
       }
 
-      span {
+      small {
         display: inline-block;
         margin-top: 8px;
+      }
+    }
+
+    .form-group.is-error {
+      input {
+        border: 1px solid colors.$red;
+      }
+
+      small {
+        color: colors.$red;
       }
     }
 
@@ -134,6 +176,198 @@ main {
       color: colors.$white;
       border: none;
       border-radius: 6px;
+    }
+  }
+
+}
+
+.right.is-active {
+  transform: translateX(100%);
+  visibility: hidden;
+}
+
+@media screen and (max-width: breakpoint.$medium-pc) {
+  .left {
+    .credit-card {
+      //color: colors.$white;
+      //width: 448px;
+      //height: 248px;
+      //background-position: center center;
+      //background-repeat: no-repeat;
+      //padding: 32px;
+      //position: relative;
+
+      &:first-of-type {
+        //margin-left: 6.5rem;
+        //margin-left: 20%;
+        margin-left: 10%;
+      }
+
+      &:last-of-type {
+        //margin-left: 10.5rem;
+        //margin-left: 30%;
+        margin-left: 16%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: breakpoint.$small-pc) {
+  .left {
+    gap: 0;
+    .credit-card {
+      transform: scale(.85);
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+
+      &:last-of-type {
+        //margin-left: 10.5rem;
+        //margin-left: 30%;
+        margin-left: 0;
+      }
+
+    }
+  }
+}
+
+
+@media screen and (max-width: breakpoint.$mobile) {
+  main {
+    display: block;
+    overflow-y: unset;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      width: 100%;
+      content: "";
+      background-image: url('../../assets/images/bg-main-mobile.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -1;
+    }
+  }
+
+  main.is-active {
+    overflow-y: hidden;
+    &:after {
+      height: 100%;
+    }
+
+    .right {
+      visibility: hidden;
+      //display: none;
+    }
+  }
+
+  .right.is-active {
+    transform: translateY(100%);
+  }
+
+  .left,
+  .right {
+    width: auto;
+  }
+
+  .left {
+    flex-direction: column-reverse;
+    position: relative;
+
+    .credit-card {
+      transform: scale(0.75);
+      &:first-of-type {
+        z-index: 1;
+        position: absolute;
+        left: 10%;
+        top: 40%;
+      }
+
+      &:last-of-type {
+        position: relative;
+        left: 22%;
+        bottom: 15px;
+      }
+    }
+  }
+
+  .right {
+    form {
+      margin-top: 8%;
+      width: 100%;
+      max-width: none;
+
+      .form-group {
+        label {
+          font-size: 14px;
+        }
+
+        input {
+          &::placeholder {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: breakpoint.$small-mobile) {
+  main {
+    &:after {
+      height: 20%;
+    }
+  }
+
+  .left {
+    flex-direction: column-reverse;
+    position: relative;
+
+    .credit-card {
+      transform: scale(0.5);
+      &:first-of-type {
+        z-index: 1;
+        position: absolute;
+        left: -5%;
+        top: 8%;
+      }
+
+      &:last-of-type {
+        position: relative;
+        left: 13%;
+        bottom: 50px;
+      }
+    }
+  }
+
+  .right {
+    form {
+      margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: breakpoint.$super-small-mobile) {
+  .left {
+
+    .credit-card {
+      &:first-of-type {
+        z-index: 1;
+        position: absolute;
+        left: -15%;
+        top: 8%;
+      }
+
+      &:last-of-type {
+        position: relative;
+        left: 1%;
+        bottom: 50px;
+      }
     }
   }
 }
