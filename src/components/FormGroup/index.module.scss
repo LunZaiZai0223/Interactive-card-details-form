@@ -1,0 +1,67 @@
+@use '@style/colors.scss';
+@use '@style/breakpoint.scss';
+
+.form-group {
+  margin-bottom: 1rem;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: colors.$very-dark-violet;
+    font-weight: 500;
+  }
+
+  input {
+    border: 1px solid colors.$light-grayish-violet;
+    border-radius: 4px;
+    line-height: 1.5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: inherit;
+
+    &::placeholder {
+      font-family: inherit;
+      color: colors.$dark-grayish-violet;
+    }
+
+    &:focus {
+      border: 1px solid transparent;
+      outline: 1px solid colors.$linear-gradient;
+    }
+
+  }
+
+  small {
+    display: inline-block;
+    margin-top: 8px;
+  }
+}
+
+.form-group.is-error {
+  input {
+    border: 1px solid colors.$red;
+  }
+
+  small {
+    color: colors.$red;
+  }
+}
+
+
+@media screen and (max-width: breakpoint.$mobile) {
+  .form-group {
+    label {
+      font-size: 14px;
+    }
+
+    input {
+      &::placeholder {
+        font-weight: 500;
+      }
+    }
+  }
+}
