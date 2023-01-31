@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { UseInput, useInput } from '@hooks/use-input';
+import { useInput } from '@hooks/use-input';
 
 import bgCardBack from '@assets/images/bg-card-back.png';
 import bgCardFront from '@assets/images/bg-card-front.png';
@@ -16,7 +16,9 @@ import {
 import { Step } from '@enums/step.enum';
 
 import style from '@components/Layout/index.module.scss';
+
 import SuccessMessage from '@components/SuccessMessage';
+import FormGroup from '@components/FormGroup';
 
 const DEFAULT_CARD_HOLDER_NAME: string = 'JANE APPLESEED';
 
@@ -24,12 +26,6 @@ const checkFormIsValid = (inputValidity: boolean[]): boolean => {
   return inputValidity.every(Boolean);
 };
 
-/*
- * TODO:
- *  1. 拆 <Form /> -> <FormGroup /> => state 要在 layout 傳兩層
- *  2. use-input 接 validationFuc 也許可以更好比方來說傳 {fieldName, func => 一整包回饋 }
- *  3. 整理程式碼
- * */
 const Layout = () => {
   const {
     isTouched: cardHolderNameIsTouched,
@@ -42,11 +38,6 @@ const Layout = () => {
     fieldName: 'Name',
     validationFuncs: [validateInputIsEmpty],
   });
-
-  console.log(cardHolderNameValidationFeedback);
-  console.log('[cardHolderNameIsTouched]', cardHolderNameIsTouched);
-
-  // const [cardNumber, setCardNumber] = useState<string>('');
 
   const {
     isTouched: cardNumberIsTouched,
@@ -61,8 +52,6 @@ const Layout = () => {
     requiredLength: 19,
   });
 
-  // const [cardYear, setCardYear] = useState<string>('');
-
   const {
     isTouched: cardYearIsTouched,
     enteredValue: cardYear,
@@ -75,8 +64,6 @@ const Layout = () => {
     validationFuncs: [validateInputIsEmpty],
   });
 
-  // const [cardMonth, setCardMonth] = useState<string>('');
-
   const {
     isTouched: cardMonthIsTouched,
     enteredValue: cardMonth,
@@ -88,8 +75,6 @@ const Layout = () => {
     fieldName: 'Month',
     validationFuncs: [validateInputIsEmpty],
   });
-
-  // const [cvcNumber, setCvcNumber] = useState<string>('');
 
   const {
     isTouched: cvcNumberIsTouched,
@@ -138,7 +123,6 @@ const Layout = () => {
     event: React.FormEvent<HTMLInputElement>
   ): void => {
     const { value, validity } = event.target as HTMLInputElement;
-    console.log(validity.valid);
     if (validity.valid) {
       setCardYear(value);
     }
@@ -190,7 +174,6 @@ const Layout = () => {
 
   const submitFormHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log('submit the form');
     setCardYearIsTouched();
     setCardMonthIsTouched();
     setCvcNumberIsTouched();
@@ -209,10 +192,6 @@ const Layout = () => {
       setAnimating(true);
       switchCurrentStepHandler();
     }
-
-    // debugger;
-    // setAnimating(true);
-    // switchCurrentStepHandler();
   };
 
   const renderRightContent = () => {
@@ -220,48 +199,26 @@ const Layout = () => {
       case Step.STEP_ONE:
         return (
           <form onSubmit={submitFormHandler}>
-            <div
-              className={`${style['form-group']} ${
-                cardHolderNameIsTouched &&
-                !cardHolderNameValidationFeedback.isValid
-                  ? style['is-error']
-                  : ''
-              }`}
-            >
-              <label>CARDHOLDER NAME</label>
-              <input
-                type="text"
-                placeholder="e.g.  Jane Appleseed"
-                value={cardHolderName}
-                onInput={enterCardHolderNameHandler}
-                onBlur={() => setCardHolderNameIsTouched()}
-              />
-              {cardHolderNameIsTouched &&
-                !cardHolderNameValidationFeedback.isValid && (
-                  <small>
-                    {cardHolderNameValidationFeedback.feedbackMessage}
-                  </small>
-                )}
-            </div>
-            <div
-              className={`${style['form-group']} ${
-                cardNumberIsTouched && !cardNumberValidationFeedback.isValid
-                  ? style['is-error']
-                  : ''
-              }`}
-            >
-              <label>CARD NUMBER</label>
-              <input
-                type="text"
-                placeholder="e.g. 1234 5678 9123 0000"
-                value={cardNumber}
-                onInput={enterCardNumberHandler}
-                onBlur={() => setCardNumberIsTouched()}
-              />
-              {cardNumberIsTouched && !cardNumberValidationFeedback.isValid && (
-                <small>{cardNumberValidationFeedback.feedbackMessage}</small>
-              )}
-            </div>
+            <FormGroup
+              label={'CARDHOLDER NAME'}
+              type={'text'}
+              placeholder={'e.g.  Jane Appleseed'}
+              inputOnChange={enterCardHolderNameHandler}
+              inputOnBlur={setCardHolderNameIsTouched}
+              inputValidationFeedback={cardHolderNameValidationFeedback}
+              inputFieldIsTouched={cardHolderNameIsTouched}
+              inputValue={cardHolderName}
+            />
+            <FormGroup
+              label={'CARD NUMBER'}
+              type={'text'}
+              placeholder={'e.g. 1234 5678 9123 0000'}
+              inputOnChange={enterCardNumberHandler}
+              inputOnBlur={setCardNumberIsTouched}
+              inputValidationFeedback={cardNumberValidationFeedback}
+              inputFieldIsTouched={cardNumberIsTouched}
+              inputValue={cardNumber}
+            />
 
             <div className={`${style['form-multiple']}`}>
               <div
@@ -302,26 +259,19 @@ const Layout = () => {
                 )}
               </div>
 
-              <div
-                className={`${style['form-group']} ${
-                  cvcNumberIsTouched && !cvcNumberValidationFeedback.isValid
-                    ? style['is-error']
-                    : ''
-                }`}
-              >
-                <label>CVC</label>
-                <input
-                  type="text"
-                  placeholder="e.g. 123"
+              <div style={{ width: '50%' }}>
+                <FormGroup
+                  label={'CVC'}
+                  type={'text'}
+                  placeholder={'e.g. 123'}
+                  inputOnChange={enterCvcNumberHandler}
+                  inputOnBlur={setCvcNumberIsTouched}
+                  inputValidationFeedback={cvcNumberValidationFeedback}
+                  inputFieldIsTouched={cvcNumberIsTouched}
+                  inputValue={cvcNumber}
                   maxLength={3}
-                  pattern="[0-9]*"
-                  value={cvcNumber}
-                  onInput={enterCvcNumberHandler}
-                  onBlur={() => setCvcNumberIsTouched()}
+                  pattern={'[0-9]*'}
                 />
-                {cvcNumberIsTouched && !cvcNumberValidationFeedback.isValid && (
-                  <small>{cvcNumberValidationFeedback.feedbackMessage}</small>
-                )}
               </div>
             </div>
 
@@ -370,7 +320,6 @@ const Layout = () => {
               )}
             </div>
             <div className={`${style['credit-card-info']}`}>
-              {/*<span>name</span>*/}
               <span>
                 {cardHolderName === '' || !cardHolderName
                   ? DEFAULT_CARD_HOLDER_NAME

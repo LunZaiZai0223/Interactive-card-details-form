@@ -107,7 +107,6 @@ main.is-active {
         font-weight: 500;
       }
 
-      // TODO: 會有不同的 status 要處理（e.g. active, error）
       input {
         border: 1px solid colors.$light-grayish-violet;
         border-radius: 4px;

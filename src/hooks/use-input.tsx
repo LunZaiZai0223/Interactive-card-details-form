@@ -13,7 +13,7 @@ export interface UseInput {
 
 export interface InputFeedback {
   isValid: boolean;
-  feedbackMessage?: string;
+  feedbackMessage: string;
 }
 
 export const useInput = ({
@@ -33,11 +33,6 @@ export const useInput = ({
     validationFuncs,
     ...(requiredLength && { requiredLength }),
   });
-
-  // if (!isTouched) {
-  //   validationFeedback.isValid = true;
-  //   validationFeedback.feedbackMessage = '';
-  // }
 
   const toggleIsTouchedHandler = (): void => {
     setIsTouched(true);
