@@ -7,7 +7,7 @@ interface BasicInput {
 }
 
 export const isNotEmpty = (inputValue: string): boolean => {
-  return inputValue.trim().length != 0;
+  return inputValue.trim().length !== 0;
 };
 
 export const containsNumber = (inputValue: string): boolean => {
@@ -81,5 +81,6 @@ export const checkInputFieldHandler = ({
 
   return {
     isValid: true,
+    feedbackMessage: '',
   };
 };
