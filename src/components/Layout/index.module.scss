@@ -175,6 +175,10 @@ main.is-active {
       color: colors.$white;
       border: none;
       border-radius: 6px;
+
+      &:hover {
+        opacity: 0.9;
+      }
     }
   }
 

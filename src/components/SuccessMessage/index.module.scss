@@ -29,6 +29,10 @@
     font-family: inherit;
     border: none;
     border-radius: 6px;
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 }
 
