@@ -24,14 +24,14 @@ Users should be able to:
 - See hover, active, and focus states for interactive elements on the page
 
 ### Screenshot
-
-![](./screenshot.jpg)
+<img width="1435" alt="截圖 2023-02-01 22 03 30" src="https://user-images.githubusercontent.com/77038018/216070975-3b809861-da13-44ad-b545-70b8e9cd601c.png">
+<img width="514" alt="截圖 2023-02-01 22 03 39" src="https://user-images.githubusercontent.com/77038018/216071013-1fbbef34-a091-4c44-a0b1-54fe3f050b07.png">
 
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Repository](https://github.com/LunZaiZai0223/Interactive-card-details-form)
+- Live Site URL: [Github Page](https://lunzaizai0223.github.io/Interactive-card-details-form/)
 
 ## Acknowledgments
 
