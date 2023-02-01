@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/LunZaiZai0223/Interactive-card-details-form/static/css/main.0d8b8e5e.css",
+    "main.js": "/LunZaiZai0223/Interactive-card-details-form/static/js/main.77ae0210.js",
+    "static/js/787.2f0f1838.chunk.js": "/LunZaiZai0223/Interactive-card-details-form/static/js/787.2f0f1838.chunk.js",
+    "static/media/bg-main-desktop.png": "/LunZaiZai0223/Interactive-card-details-form/static/media/bg-main-desktop.806e7aa7b4dbc1d78bc3.png",
+    "static/media/bg-card-back.png": "/LunZaiZai0223/Interactive-card-details-form/static/media/bg-card-back.23f68fa3aa3d5b33dfc8.png",
+    "static/media/bg-card-front.png": "/LunZaiZai0223/Interactive-card-details-form/static/media/bg-card-front.8153e2ca184402a8385f.png",
+    "static/media/bg-main-mobile.png": "/LunZaiZai0223/Interactive-card-details-form/static/media/bg-main-mobile.caa4689407777a312ede.png",
+    "index.html": "/LunZaiZai0223/Interactive-card-details-form/index.html",
+    "static/media/icon-complete.svg": "/LunZaiZai0223/Interactive-card-details-form/static/media/icon-complete.8fd757c0c5c44b1d597ca411400e046d.svg",
+    "static/media/card-logo.svg": "/LunZaiZai0223/Interactive-card-details-form/static/media/card-logo.8ca9036515954c3f8191559dce9c7bdf.svg",
+    "main.0d8b8e5e.css.map": "/LunZaiZai0223/Interactive-card-details-form/static/css/main.0d8b8e5e.css.map",
+    "main.77ae0210.js.map": "/LunZaiZai0223/Interactive-card-details-form/static/js/main.77ae0210.js.map",
+    "787.2f0f1838.chunk.js.map": "/LunZaiZai0223/Interactive-card-details-form/static/js/787.2f0f1838.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d8b8e5e.css",
+    "static/js/main.77ae0210.js"
+  ]
+}
